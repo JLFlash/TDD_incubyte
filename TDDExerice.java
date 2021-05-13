@@ -4,7 +4,7 @@ import java.util.*;
 
 public class TDDExerice
 {
-	public String del;
+	public String[] del;
 	public static void main(String[] args) {
 		TDDExerice tddObj = new TDDExerice();
 		//Assuming the inputs are given in Standard IO
@@ -41,7 +41,10 @@ public class TDDExerice
 	        return 0;
 	    }
 		if(del!=null) {
-			numbers = numbers.replace(del, ",");
+			for(int i=0;i<del.length;i++) {
+				numbers = numbers.replace(del[i], ",");
+			}
+			
 		}
 		StringBuilder negativeStrings = new StringBuilder();
 		StringBuilder numberString = new StringBuilder();
@@ -79,8 +82,25 @@ public class TDDExerice
 		
 	}
 	
-	private String getDelimeters(String firstLine) {
-		return firstLine.substring(firstLine.indexOf('[')+1, firstLine.indexOf(']'));
+	private String[] getDelimeters(String firstLine) {
+		ArrayList<String> delimeters = new ArrayList<String>();
+		StringBuilder delimeter = new StringBuilder();
+		for(int i=2; i<firstLine.length();i++) {
+			char currentChar = firstLine.charAt(i);
+			if(currentChar!='[' && currentChar!=']') {
+				delimeter = delimeter.append(currentChar);
+			} else if(currentChar==']') {
+				delimeters.add(delimeter.toString());
+				delimeter = new StringBuilder();
+			}
+		}
+		String[] returnArray = new String[delimeters.size()];
+		for(int i=0;i<delimeters.size();i++) {
+			returnArray[i] = delimeters.get(i);
+		}
+		return returnArray;
+		
+		//return (String[])delimeters.toArray(new String[delimeters.size()]);
 	}
 	
 	
