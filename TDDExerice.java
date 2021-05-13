@@ -4,6 +4,7 @@ import java.util.*;
 
 public class TDDExerice
 {
+	public char del;
 	public static void main(String[] args) {
 		TDDExerice tddObj = new TDDExerice();
 		//Assuming the inputs are given in Standard IO
@@ -13,6 +14,14 @@ public class TDDExerice
 		Scanner scanner = new Scanner(System.in);
 		StringBuilder inputString = new StringBuilder();
 		String inputLine = null;
+		String firstLine = scanner.nextLine();
+		String delimeter = null;
+		if(firstLine.indexOf("//")==0) {
+			tddObj.del = firstLine.charAt(2);
+		} else {
+			tddObj.del = '\0';
+			inputString.append(firstLine+"\n");
+		}
 		while(scanner.hasNext()) {
 			inputLine = scanner.nextLine();
 			if(inputLine.equals("EOF")) {
@@ -32,7 +41,7 @@ public class TDDExerice
 		StringBuilder numberString = new StringBuilder();
 		int total = 0;
 		for(int i=0;i<numbers.length();i++) {
-			if(numbers.charAt(i)==','||numbers.charAt(i)=='\n') {
+			if(numbers.charAt(i)==','||numbers.charAt(i)=='\n'||numbers.charAt(i)==del) {
 				if(numberString.toString().equals("")) {
 					continue;
 				}
