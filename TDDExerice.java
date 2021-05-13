@@ -29,31 +29,43 @@ public class TDDExerice
 			}
 			inputString.append(inputLine+"\n");
 		}
-		System.out.println(inputString);
-		System.out.println("\n"+tddObj.Add(inputString.toString()));
+		try {
+			System.out.println("\n"+tddObj.Add(inputString.toString()));
+		} catch(Exception exp) {
+			System.out.println(exp.toString());
+		}
 	}
 	
-	public int Add(String numbers) {
+	public int Add(String numbers) throws Exception {
 	    if(numbers == null || numbers.equals("")) {
 	        return 0;
 	    }
-		
+		StringBuilder negativeStrings = new StringBuilder();
 		StringBuilder numberString = new StringBuilder();
 		int total = 0;
 		for(int i=0;i<numbers.length();i++) {
-			if(numbers.charAt(i)==','||numbers.charAt(i)=='\n'||numbers.charAt(i)==del) {
+			char currentChar = numbers.charAt(i);
+			if(currentChar==','||currentChar=='\n'||currentChar==del) {
 				if(numberString.toString().equals("")) {
 					continue;
 				}
-				System.out.println((numberString.toString().trim()));
-				total = total + Integer.parseInt(numberString.toString().trim());
+				int currentInteger = Integer.parseInt(numberString.toString().trim());
+				System.out.println(currentInteger);
+				if(currentInteger>0) {
+					total = total + currentInteger;
+				} else {
+					negativeStrings.append(""+currentInteger);
+				}
+				
 				numberString = new StringBuilder();
-			} else if(numbers.charAt(i)==' ') {
+			} else if(currentChar==' ') {
 				continue;
 			}else {
-				
-				numberString.append(numbers.charAt(i));
+				numberString.append(currentChar);
 			}
+		}
+		if(negativeStrings.length()>0) {
+			throw new Exception("Negatives not allowed "+negativeStrings);
 		}
 		if(numberString.toString().equals("")) {
 			return total;
