@@ -4,7 +4,7 @@ import java.util.*;
 
 public class TDDExerice
 {
-	public char del;
+	public String del;
 	public static void main(String[] args) {
 		TDDExerice tddObj = new TDDExerice();
 		//Assuming the inputs are given in Standard IO
@@ -17,9 +17,9 @@ public class TDDExerice
 		String firstLine = scanner.nextLine();
 		String delimeter = null;
 		if(firstLine.indexOf("//")==0) {
-			tddObj.del = firstLine.charAt(2);
+			tddObj.del = tddObj.getDelimeters(firstLine);
 		} else {
-			tddObj.del = '\0';
+			tddObj.del = null;
 			inputString.append(firstLine+"\n");
 		}
 		while(scanner.hasNext()) {
@@ -40,12 +40,15 @@ public class TDDExerice
 	    if(numbers == null || numbers.equals("")) {
 	        return 0;
 	    }
+		if(del!=null) {
+			numbers = numbers.replace(del, ",");
+		}
 		StringBuilder negativeStrings = new StringBuilder();
 		StringBuilder numberString = new StringBuilder();
 		int total = 0;
 		for(int i=0;i<numbers.length();i++) {
 			char currentChar = numbers.charAt(i);
-			if(currentChar==','||currentChar=='\n'||currentChar==del) {
+			if(currentChar==','||currentChar=='\n') {
 				if(numberString.toString().equals("")) {
 					continue;
 				}
@@ -74,6 +77,10 @@ public class TDDExerice
 		
 		return total;
 		
+	}
+	
+	private String getDelimeters(String firstLine) {
+		return firstLine.substring(firstLine.indexOf('[')+1, firstLine.indexOf(']'));
 	}
 	
 	
