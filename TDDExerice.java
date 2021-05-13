@@ -50,10 +50,10 @@ public class TDDExerice
 					continue;
 				}
 				int currentInteger = Integer.parseInt(numberString.toString().trim());
-				System.out.println(currentInteger);
-				if(currentInteger>0) {
+				//System.out.println(currentInteger);
+				if(currentInteger<=1000 && currentInteger>0) {
 					total = total + currentInteger;
-				} else {
+				} else if(currentInteger<0) {
 					negativeStrings.append(""+currentInteger);
 				}
 				
