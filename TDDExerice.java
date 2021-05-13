@@ -17,11 +17,11 @@ public class TDDExerice
 	        return 0;
 	    }
 	    String[] split = numbers.split(",");
-	    int secondNumber = 0;
-	    if(split.length>1) {
-	        secondNumber = Integer.parseInt(split[1].trim());
-	    }
-	    return (Integer.parseInt(split[0].trim())+secondNumber);
+		int total = 0;
+	    for(int i=0;i<split.length;i++) {
+			total = total+ Integer.parseInt(split[i].trim());
+		}
+	    return total;
 	}
 	
 	
